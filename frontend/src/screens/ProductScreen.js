@@ -11,6 +11,7 @@ export default function ProductScreen(props) {
   const dispatch = useDispatch();
   const productId = props.match.params.id;
   const [qty, setQty] = useState(1);
+  const [size, setSize] = useState('small');
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
   const userSignin = useSelector((state) => state.userSignin);
@@ -76,10 +77,26 @@ export default function ProductScreen(props) {
                     numReviews={product.numReviews}
                   ></Rating>
                 </li>
-                <li>Pirce : ${product.price}</li>
+                <li>Price : {product.price}/-</li>
+                <li>Dimensions Size-L: {product.Ldimension}</li>
+                <li>Dimensions Size-M: {product.Mdimension}</li>
+                <li>Dimensions Size-S: {product.Sdimension}</li>
+                <li>Material: {product.material}</li>
                 <li>
                   Description:
                   <p>{product.description}</p>
+                </li>
+                <li>
+                  Instructions:
+                  <p>{product.howToUse}</p>
+                </li>
+                <li>
+                Washing Tips:
+                  <p>{product.WashingTips}</p>
+                </li>
+                <li>
+                Storage:
+                  <p>{product.Storage}</p>
                 </li>
               </ul>
             </div>
@@ -101,7 +118,12 @@ export default function ProductScreen(props) {
                   <li>
                     <div className="row">
                       <div>Price</div>
-                      <div className="price">${product.price}</div>
+                      {size ==='small' &&
+                      <div className="price">{product.Sprice}/-</div>}
+                      {size ==='medium' &&
+                      <div className="price">{product.Mprice}/-</div>}
+                      {size ==='large' &&
+                      <div className="price">{product.Lprice}/-</div>}
                     </div>
                   </li>
                   <li>
@@ -126,13 +148,34 @@ export default function ProductScreen(props) {
                               value={qty}
                               onChange={(e) => setQty(e.target.value)}
                             >
-                              {[...Array(product.countInStock).keys()].map(
+                              {[...Array(product.LStock).keys()].map(
                                 (x) => (
                                   <option key={x + 1} value={x + 1}>
                                     {x + 1}
                                   </option>
                                 )
                               )}
+                            </select>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="row">
+                          <div>Size</div>
+                          <div>
+                            <select
+                              value={size}
+                              onChange={(e) => setSize(e.target.value)}
+                            >
+                                  <option  value={'small'}>
+                                    Small
+                                  </option>
+                                  <option  value={'medium'}>
+                                  Medium
+                                </option>
+                                  <option  value={'large'}>
+                                  Large
+                                </option>
                             </select>
                           </div>
                         </div>
