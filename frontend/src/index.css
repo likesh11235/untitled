@@ -37,6 +37,7 @@ footer {
   grid-area: footer;
   background-color: #203040;
   color: #ffffff;
+  display: inline;
 }
 /* Common */
 h1 {
@@ -61,6 +62,7 @@ ul {
 }
 li {
   margin-top: 1rem;
+  font-size: small;
 }
 input,
 select,
