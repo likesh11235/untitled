@@ -9,12 +9,30 @@ import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
 export default function ProductEditScreen(props) {
   const productId = props.match.params.id;
   const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
+  const [Sprice, setSprice] = useState('');
+  const [Lprice, setLprice] = useState('');
+  const [Mprice, setMprice] = useState('');
+  const [seller, setSeller] = useState('');
+  const [color, setColor] = useState('');
   const [image, setImage] = useState('');
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
+  const [material, setMaterial] = useState('');
+  const [Ldimension, setLdimension] = useState('');
+  const [Mdimension, setMdimension] = useState('');
+  const [Sdimension, setSdimension] = useState('');
+  const [howToUse, setHowToUse] = useState('');
+  const [WashingTips, setWashingTips] = useState('');
+  const [Storage, setStorage] = useState('');
+  const [Lstock, setLstock] = useState('');
+  const [Mstock, setMstock] = useState('');
+  const [Sstock, setSstock] = useState('');
+  const [lid, setLid] = useState('');
+  const [painted, setPainted] = useState('');
+  // const [Sstock, setSstock] = useState('');
+  // const [description, setDescription] = useState('');
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -36,7 +54,24 @@ export default function ProductEditScreen(props) {
       dispatch(detailsProduct(productId));
     } else {
       setName(product.name);
-      setPrice(product.price);
+      setSprice(product.Sprice);
+      setMprice(product.Mprice);
+      setLprice(product.Lprice);
+      setSeller(product.seller);
+      setColor(product.color);
+      setMaterial(product.material);
+      setLdimension(product.Ldimension);
+      setMdimension(product.Mdimension);
+      setSdimension(product.Sdimension);
+      setHowToUse(product.howToUse);
+      setWashingTips(product.WashingTips);
+      setStorage(product.Storage);
+      setLstock(product.Lstock);
+      setMstock(product.Mstock);
+      setSstock(product.Sstock);
+      setLid(product.lid);
+      setPainted(product.painted);
+      // setPrice(product.price);
       setImage(product.image);
       setCategory(product.category);
       setCountInStock(product.countInStock);
@@ -51,12 +86,28 @@ export default function ProductEditScreen(props) {
       updateProduct({
         _id: productId,
         name,
-        price,
         image,
         category,
         brand,
         countInStock,
         description,
+        seller,
+    color,
+    material,
+    Ldimension,
+    Mdimension,
+    Sdimension,
+    howToUse,
+    WashingTips,
+    Storage,
+    Lprice,
+    Mprice,
+    Sprice,
+    Lstock,
+    Mstock,
+    Sstock,
+    lid,
+    painted
       })
     );
   };
@@ -110,15 +161,36 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="price">Price</label>
+              <label htmlFor="Lprice">LPrice</label>
+              <input
+                id="LPrice"
+                type="text"
+                placeholder="Enter Lprice"
+                value={Lprice}
+                onChange={(e) => setLprice(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="price">MPrice</label>
               <input
                 id="price"
                 type="text"
-                placeholder="Enter price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                placeholder="Enter Mprice"
+                value={Mprice}
+                onChange={(e) => setMprice(e.target.value)}
               ></input>
             </div>
+            <div>
+              <label htmlFor="price">SPrice</label>
+              <input
+                id="price"
+                type="text"
+                placeholder="Enter Sprice"
+                value={Sprice}
+                onChange={(e) => setSprice(e.target.value)}
+              ></input>
+            </div>
+
             <div>
               <label htmlFor="image">Image</label>
               <input
@@ -163,14 +235,126 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="countInStock">Count In Stock</label>
+              <label htmlFor="LStock">LStock</label>
               <input
                 id="countInStock"
                 type="text"
-                placeholder="Enter countInStock"
-                value={countInStock}
-                onChange={(e) => setCountInStock(e.target.value)}
+                placeholder="Enter Lstock"
+                value={Lstock}
+                onChange={(e) => setLstock(e.target.value)}
               ></input>
+            </div>
+            <div>
+              <label htmlFor="MStock">MStock</label>
+              <input
+                id="countInStock"
+                type="text"
+                placeholder="Enter Mstock"
+                value={Mstock}
+                onChange={(e) => setMstock(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="Sstock">SStock</label>
+              <input
+                id="countInStock"
+                type="text"
+                placeholder="Enter Sstock"
+                value={Sstock}
+                onChange={(e) => setSstock(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="Painted">Painted</label>
+              <input
+                id="Painted"
+                type="text"
+                placeholder="Enter Painted status"
+                value={painted}
+                onChange={(e) => setPainted(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="Lid">Lid</label>
+              <input
+                id="Lid"
+                type="text"
+                placeholder="Enter Lid status"
+                value={lid}
+                onChange={(e) => setLid(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="color">color</label>
+              <input
+                id="color"
+                type="text"
+                placeholder="Enter color"
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="material">material</label>
+              <input
+                id="material"
+                type="text"
+                placeholder="Enter Material"
+                value={material}
+                onChange={(e) => setMaterial(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="Ldimension">Ldimension</label>
+              <input
+                id="Lid"
+                type="text"
+                placeholder="Enter L Dimension"
+                value={Ldimension}
+                onChange={(e) => setLdimension(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="Mdimension">Mdimension</label>
+              <input
+                id="Mdimension"
+                type="text"
+                placeholder="Enter M Dimension"
+                value={Mdimension}
+                onChange={(e) => setMdimension(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="Sdimension">Sdimension</label>
+              <input
+                id="Sdimension"
+                type="text"
+                placeholder="Enter S Dimension"
+                value={Sdimension}
+                onChange={(e) => setSdimension(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="description">How to use</label>
+              <textarea
+                id="description"
+                rows="3"
+                type="text"
+                placeholder="Enter How to use"
+                value={howToUse}
+                onChange={(e) => setHowToUse(e.target.value)}
+              ></textarea>
+            </div>
+            <div>
+              <label htmlFor="description">WashingTips</label>
+              <textarea
+                id="description"
+                rows="3"
+                type="text"
+                placeholder="Enter How to Wash"
+                value={WashingTips}
+                onChange={(e) => setWashingTips(e.target.value)}
+              ></textarea>
             </div>
             <div>
               <label htmlFor="description">Description</label>
@@ -181,6 +365,17 @@ export default function ProductEditScreen(props) {
                 placeholder="Enter description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+              ></textarea>
+            </div>
+            <div>
+              <label htmlFor="description">Storage</label>
+              <textarea
+                id="description"
+                rows="3"
+                type="text"
+                placeholder="Enter Storage"
+                value={Storage}
+                onChange={(e) => setStorage(e.target.value)}
               ></textarea>
             </div>
             <div>

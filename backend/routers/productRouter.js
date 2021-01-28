@@ -112,13 +112,30 @@ productRouter.post(
       name: 'sample name ' + Date.now(),
       seller: req.user._id,
       image: '/images/p1.jpg',
-      price: 0,
+      // price: 0,
       category: 'sample category',
       brand: 'sample brand',
       countInStock: 0,
       rating: 0,
       numReviews: 0,
       description: 'sample description',
+     color: 'brown',
+    material: 'terrcotta',
+    Ldimension: "sample",
+    Mdimension: 'sample',
+    Sdimension:'sample',
+    howToUse: 'Dip the utensil completely in water for a day & then fill the vessel with rice starch for few hours.When the vessel is hot do not pour cold water, let the vessel temperature come to normal then wash.',
+    WashingTips: 'Always avoid Metallic scrubber rather use Soft sponge. Simply use hot water with lime. Avoid cleaning earthenware with a soap or detergent or in a dish washer.',
+    Storage: 'Allow the vessel to dry completely before storage. Once in a week Fill half the vessel with water, boil for 3 min & then dispose the water to remove oil & stains, this will also strengthen & hygiene the utensil.',
+    Lprice: 0,
+    Mprice: 0,
+    Sprice: 0,
+    price: 0,
+    Lstock: 0,
+    Mstock: 0,
+    Sstock: 0,
+    lid: 0,
+    painted: 0,
     });
     const createdProduct = await product.save();
     res.send({ message: 'Product Created', product: createdProduct });
@@ -133,12 +150,28 @@ productRouter.put(
     const product = await Product.findById(productId);
     if (product) {
       product.name = req.body.name;
-      product.price = req.body.price;
+      // product.price = req.body.price;
       product.image = req.body.image;
       product.category = req.body.category;
       product.brand = req.body.brand;
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;
+      product.color = req.body.color,
+    product.material = req.body.material,
+    product.Ldimension = req.body.Ldimension,
+    product.Mdimension = req.body.Mdimension,
+    product.Sdimension = req.body.Sdimension,
+    product.howToUse = req.body.howToUse,
+    product.WashingTips = req.body.WashingTips,
+    product.Storage = req.body.Storage,
+    product.Lprice = req.body.Lprice,
+    product.Mprice = req.body.Mprice,
+    product.Sprice = req.body.Sprice,
+    product.Lstock = req.body.Lstock,
+    product.Mstock = req.body.Mstock,
+    product.Sstock = req.body.Sstock ,
+    product.lid = req.body.lid,
+    product.painted = req.body.painted
       const updatedProduct = await product.save();
       res.send({ message: 'Product Updated', product: updatedProduct });
     } else {
