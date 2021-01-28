@@ -15,9 +15,7 @@ export default function ProductScreen(props) {
 
   const [size, setSize] = useState('small');
   const productDetails = useSelector((state) => state.productDetails);
-  console.log(productDetails)
   const { loading, error, product } = productDetails;
-  console.log(product)
   const [fPrice, setfPrice] = useState(350)
   // useState(product.Sprice);
   const userSignin = useSelector((state) => state.userSignin);
@@ -46,6 +44,7 @@ export default function ProductScreen(props) {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId, successReviewCreate]);
   const addToCartHandler = () => {
+
     props.history.push(`/cart/${productId}?qty=${qty}?size=${size}`);
   };
   const submitHandler = (e) => {
@@ -59,8 +58,6 @@ export default function ProductScreen(props) {
     }
   };
   const handleChange = (event) => {
-    console.log(event)
-    console.log(props)
     if(event ==='small'){
       // this.setState({ fPrice: this.state.Sprice,size:setSize(event) }  
       setSize(event)

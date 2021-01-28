@@ -7,6 +7,7 @@ import {
   CART_SAVE_SHIPPING_ADDRESS,
 } from '../constants/cartConstants';
 
+
 export const cartReducer = (state = { cartItems: [] }, action) => {
   switch (action.type) {
     case CART_ADD_ITEM:
@@ -41,3 +42,4 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       return state;
   }
 };
+

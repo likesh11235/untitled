@@ -5,32 +5,18 @@ import { addToCart, removeFromCart } from '../actions/cartActions';
 import MessageBox from '../components/MessageBox';
 
 export default function CartScreen(props) {
-  console.log(props)
   const productId = props.match.params.id;
   let qStr= props.location.search?props.location.search.split('=')[1]:1
   let qty = qStr
-  
   if (qStr!==1){
     qty = qStr.split('?')[0] ?qStr.split('?')[0]:1
   }
-  // let qty = qStr.split('?')[0] ?qStr.split('?')[0]:1
-  console.log(qty)
-  // const qty = props.location.search
-  //   ? Number(props.location.search.split('=')[1])
-  //   : 1;
-  //   console.log(qty)
-    console.log(props.location.search.split('=')[1])
   const Psize = props.location.search
     ? props.location.search.split('=')[2]
     : 'small';
-    console.log(Psize)
   const [size, setSize] = useState(Psize);
   const cart = useSelector((state) => state.cart);
-  console.log(cart)
   const { cartItems, error } = cart;
-  console.log(cartItems)
-  console.log(cartItems.reduce((a, c) => a + c.qty, 0))
-  console.log(cartItems.reduce((a, c) => a + c.price * c.qty, 0))
   const dispatch = useDispatch();
   useEffect(() => {
     if (productId) {
@@ -73,8 +59,10 @@ export default function CartScreen(props) {
                   </div>
                   <div>
                             <select
-                              value={size}
-                              onChange={(e) => setSize(e.target.value)}
+                              value={item.size}
+                              onChange={(e) => dispatch(
+                                addToCart(item.product, item.qty, e.target.value)
+                              )}
                             >
                                   <option  value={'small'}>
                                     Small
@@ -92,7 +80,7 @@ export default function CartScreen(props) {
                       value={item.qty}
                       onChange={(e) =>
                         dispatch(
-                          addToCart(item.product, Number(e.target.value))
+                          addToCart(item.product, Number(e.target.value), item.size)
                         )
                       }
                     >
@@ -104,12 +92,12 @@ export default function CartScreen(props) {
                     </select>
                   </div>
                   <div>
-                  {size ==='small' &&
-                      <div className="price">{item.Sprice}/-</div>}
-                      {size ==='medium' &&
-                      <div className="price">{item.Mprice}/-</div>}
-                      {size ==='large' &&
-                      <div className="price">{item.Lprice}/-</div>}
+                  {item.size ==='small' &&
+                      <div className="price">{item.Sprice * item.qty}/-</div>}
+                      {item.size ==='medium' &&
+                      <div className="price">{item.Mprice * item.qty}/-</div>}
+                      {item.size ==='large' &&
+                      <div className="price">{item.Lprice * item.qty}/-</div>}
                   </div>
                   <div>
                     <button
@@ -130,7 +118,7 @@ export default function CartScreen(props) {
           <ul>
             <li>
               <h2>
-                Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : 
+                Subtotal ({cartItems.reduce((a, c) => parseInt(a) + parseInt(c.qty), 0)} items) : 
                 {cartItems.reduce((a, c) => a + (c.size==='small'?c.Sprice * c.qty:c.size==='medium'?c.Mprice * c.qty:c.Lprice * c.qty), 0)}/-
                 
               </h2>
