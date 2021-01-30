@@ -74,7 +74,7 @@ function App() {
           </div>
           <div>
             <Link to="/cart">
-              Cart
+              <span id="header-cart">Cart</span>
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
               )}
@@ -241,7 +241,7 @@ function App() {
 
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
-        <footer className="row center"><ul>
+        <footer className="row center" id="white"><ul>
           <li>All rights reserved</li>
           <li>Contact:9182790633</li>
           </ul></footer>

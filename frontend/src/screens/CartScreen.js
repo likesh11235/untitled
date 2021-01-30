@@ -54,8 +54,8 @@ export default function CartScreen(props) {
                       className="small"
                     ></img>
                   </div>
-                  <div className="min-30">
-                    <Link to={`/product/${item.product}`}>{item.name}</Link>
+                  <div className="min-30" >
+                    <Link to={`/product/${item.product}`}><span id="black">{item.name}</span></Link>
                   </div>
                   <div>
                             <select
@@ -118,8 +118,11 @@ export default function CartScreen(props) {
           <ul>
             <li>
               <h2>
+                <span id="white">
                 Subtotal ({cartItems.reduce((a, c) => parseInt(a) + parseInt(c.qty), 0)} items) : 
                 {cartItems.reduce((a, c) => a + (c.size==='small'?c.Sprice * c.qty:c.size==='medium'?c.Mprice * c.qty:c.Lprice * c.qty), 0)}/-
+                </span>
+               
                 
               </h2>
             </li>
