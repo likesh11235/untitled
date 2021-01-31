@@ -75,7 +75,7 @@ function App() {
           </div>
           <div>
             <Link to="/cart">
-              Cart
+              <span id="header-cart">Cart</span>
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
               )}
@@ -245,32 +245,38 @@ function App() {
         </main>
         <footer className="row center">
         <div className="row">
-                <div className="col span-1-of-2">
+                <div className="col span-1-of-3">
+                  <div className = "navFooterColHead">Get to Know us</div>
                     <ul className="footer-nav">
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Press</a></li>
-                        {/* <li><a href="#">iOS App</a></li> */}
-                        {/* <li><a href="#">Android App</a></li> */}
+                        <li><a href="#features">About us</a></li>
+                        <li><a href="#instructions">Instructions</a></li>
+                        <li><a href="#Products">Products</a></li>
                     </ul>
                 </div>
-                <div className="col span-1-of-2">
+                <div className="col span-1-of-3">
+                  <div className = "navFooterColHead">Connect with us</div>
+                    <ul className="footer-nav">
+                        <li><a href="#features">Facebook</a></li>
+                        <li><a href="#instructions">Instagram</a></li>
+                        <li><a href="#instructions">Twitter</a></li>
+                    </ul>
+                </div>
+                {/* <div className="col span-3-of-3">
                     <ul className="social-links">
                         <li><a href="#"><i className="ion-social-facebook"></i></a></li>
                         <li><a href="#"><i className="ion-social-twitter"></i></a></li>
                         <li><a href="#"><i className="ion-social-googleplus"></i></a></li>
                         <li><a href="#"><i className="ion-social-instagram"></i></a></li>
                     </ul>
-                </div>
+                </div> */}
             </div>
-            <div className="row">
+            <div className="col span-3-of-3">
                 <p>
-                    This webpage was created for the untitled Arts Earthenware.copyrights here.
-                </p>
-                <p>
-                    Build with 
+                    This website was created by the untitled Arts Earthenware.
+                    copyrights UntitledArts.com, Inc.or its affiliates. 
+                    {/* Build with  */}
                     {/* <i className="ion-ios-heart" style="color: #ea0000; padding: 0 3px;"></i>  */}
-                    in the beautiful city of Bangalore.
+                    {/* in the beautiful city of Bangalore. */}
                 </p>
             </div>
           </footer>

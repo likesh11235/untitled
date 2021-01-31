@@ -86,7 +86,7 @@ export default function ProductScreen(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div>
-          <Link to="/">Back to result</Link>
+          <Link to="/"><div id="back-to-result">Back to result</div></Link>
           <div className="row top">
             <div className="col-2">
               <img
@@ -116,7 +116,7 @@ export default function ProductScreen(props) {
                 <h4>Description:</h4>
                   <p>{product.description}</p>
                 </li>
-                <li>
+                {/* <li>
                 <h4>Instructions:</h4>
                   <p>{product.howToUse}</p>
                 </li>
@@ -127,26 +127,26 @@ export default function ProductScreen(props) {
                 <li>
                 <h4>Storage:</h4>
                   <p>{product.Storage}</p>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div className="col-1">
               <div className="card card-body">
                 <ul>
                   <li>
-                    Seller{' '}
-                    <h2>
+                    {/* <span id="seller">Seller{' '}</span> */}
+                    {/* <h2>
                       <Link to={`/seller/${product.seller._id}`}>
                         {product.seller.seller.name}
                       </Link>
-                    </h2>
+                    </h2> */}
                     <Rating
                       rating={product.seller.seller.rating}
                       numReviews={product.seller.seller.numReviews}
                     ></Rating>
                   </li>
                   <li>
-                    <div className="row">
+                    <div className="row" id="white">
                       <div>Price</div>
                       {size ==='small' &&
                       <div className="price">{product.Sprice}/-</div>}
@@ -157,7 +157,7 @@ export default function ProductScreen(props) {
                     </div>
                   </li>
                   <li>
-                    <div className="row">
+                    <div className="row" id="white">
                       <div>Status</div>
                       <div>
                         {product.countInStock > 0 ? (
@@ -171,7 +171,7 @@ export default function ProductScreen(props) {
                   {product.countInStock > 0 && (
                     <>
                       <li>
-                        <div className="row">
+                        <div className="row" id="white">
                           <div>Qty</div>
                           <div>
                             <select
@@ -190,7 +190,7 @@ export default function ProductScreen(props) {
                         </div>
                       </li>
                       <li>
-                        <div className="row">
+                        <div className="row" id="white">
                           <div>Size</div>
                           <div>
                             <select

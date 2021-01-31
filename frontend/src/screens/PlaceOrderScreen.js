@@ -35,7 +35,7 @@ export default function PlaceOrderScreen(props) {
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
       <div className="row top">
-        <div className="col-2">
+        <div className="col-2" id="white">
           <ul>
             <li>
               <div className="card card-body">
@@ -49,7 +49,7 @@ export default function PlaceOrderScreen(props) {
               </div>
             </li>
             <li>
-              <div className="card card-body">
+              <div className="card card-body" >
                 <h2>Payment</h2>
                 <p>
                   <strong>Method:</strong> {cart.paymentMethod}
@@ -57,12 +57,12 @@ export default function PlaceOrderScreen(props) {
               </div>
             </li>
             <li>
-              <div className="card card-body">
+              <div className="card card-body" >
                 <h2>Order Items</h2>
                 <ul>
                   {cart.cartItems.map((item) => (
                     <li key={item.product}>
-                      <div className="row">
+                      <div className="row" id="white"> 
                         <div>
                           <img
                             src={item.image}
@@ -87,32 +87,32 @@ export default function PlaceOrderScreen(props) {
             </li>
           </ul>
         </div>
-        <div className="col-1">
-          <div className="card card-body">
+        <div className="col-1" id="white">
+          <div className="card card-body" >
             <ul>
               <li>
                 <h2>Order Summary</h2>
               </li>
               <li>
-                <div className="row">
+                <div className="row" id="white">
                   <div>Items</div>
                   <div>{cart.itemsPrice.toFixed(2)}/-</div>
                 </div>
               </li>
               <li>
-                <div className="row">
+                <div className="row" id="white">
                   <div>Shipping</div>
                   <div>{cart.shippingPrice.toFixed(2)}/-</div>
                 </div>
               </li>
               <li>
-                <div className="row">
+                <div className="row" id="white">
                   <div>Tax</div>
                   <div>{cart.taxPrice.toFixed(2)}/-</div>
                 </div>
               </li>
               <li>
-                <div className="row">
+                <div className="row" id="white">
                   <div>
                     <strong> Order Total</strong>
                   </div>

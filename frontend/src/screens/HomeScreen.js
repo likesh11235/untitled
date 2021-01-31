@@ -47,7 +47,7 @@ export default function HomeScreen() {
           </Carousel>
         </>
       )} */}
-      <h2>Featured Products</h2>
+      <h2 className="category_title" id="Products">Featured Products</h2>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -62,7 +62,7 @@ export default function HomeScreen() {
           </div>
         </>
       )}
-      <section class="section-features js--section-features" id="features">
+           <section class="section-features js--section-features" id="features">
             <div class="row">
                 <h2>Health is Wealth &mdash;Let us earn you that</h2>
                 <p class="long-copy">
@@ -101,6 +101,36 @@ export default function HomeScreen() {
                 </div>
             </div>   
         </section>
+        <section class="section-features js--section-features" id="instructions">
+            <div class="row">
+                <h2>Instructions</h2>
+            </div>
+            
+            <div class="row js--wp-1">
+                <div class="col span-1-of-3 box">
+                    {/* <i class="ion-ios-infinite-outline icon-big"></i> */}
+                    <h3>How to use</h3>
+                    <p>
+                    Dip the utensil completely in water for a day and then fill the vessel with rice starch for few hours.When the vessel is hot do not pour cold water, let the vessel temperature come to normal then wash.
+                    </p>
+                </div>
+                <div class="col span-1-of-3 box">
+                    {/* <i class="ion-ios-stopwatch-outline icon-big"></i> */}
+                    <h3>How to wash</h3>
+                    <p>
+                    Always avoid Metallic scrubber rather use Soft sponge. Simply use hot water with lime. Avoid cleaning earthenware with a soap or detergent or in a dish washer.
+                    </p>
+                </div>
+                <div class="col span-1-of-3 box">
+                    {/* <i class="ion-ios-nutrition-outline icon-big"></i> */}
+                    <h3>Storage</h3>
+                    <p>
+                    Allow the vessel to dry completely before storage. Once in a week Fill half the vessel with water, boil for 3 min ,then dispose the water to remove oil and stains, this will also strengthen and hygiene the utensil.
+                    </p>
+                </div>
+            </div>   
+        </section>
+   
     </div>
   );
 }
