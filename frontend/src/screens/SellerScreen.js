@@ -43,7 +43,7 @@ export default function SellerScreen(props) {
                   ></img>
                 </div>
                 <div className="p-1">
-                  <h1>{user.seller.name}</h1>
+                  <h1 id="white">{user.seller.name}</h1>
                 </div>
               </div>
             </li>
@@ -56,7 +56,7 @@ export default function SellerScreen(props) {
             <li>
               <a href={`mailto:${user.email}`}>Contact Seller</a>
             </li>
-            <li>{user.seller.description}</li>
+            <li id="white">{user.seller.description}</li>
           </ul>
         )}
       </div>
