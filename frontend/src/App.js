@@ -241,7 +241,10 @@ function App() {
 
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
-        <footer className="row center">All right reserved</footer>
+        <footer className="row center"><ul>
+          <li>All rights reserved</li>
+          <li>Contact:9182790633</li>
+          </ul></footer>
       </div>
     </BrowserRouter>
   );

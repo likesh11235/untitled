@@ -6,17 +6,26 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Rating from '../components/Rating';
 import { PRODUCT_REVIEW_CREATE_RESET } from '../constants/productConstants';
+import Product from '../components/Product';
 
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
   const productId = props.match.params.id;
   const [qty, setQty] = useState(1);
+
   const [size, setSize] = useState('small');
   const productDetails = useSelector((state) => state.productDetails);
+  console.log(productDetails)
   const { loading, error, product } = productDetails;
+  console.log(product)
+  const [fPrice, setfPrice] = useState(350)
+  // useState(product.Sprice);
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
-
+//   const [stateVal, setSizePrice] = useState({
+//     fPrice:Sprice,
+//     size: 'small',
+//  });
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
   const {
     loading: loadingReviewCreate,
@@ -37,7 +46,7 @@ export default function ProductScreen(props) {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId, successReviewCreate]);
   const addToCartHandler = () => {
-    props.history.push(`/cart/${productId}?qty=${qty}`);
+    props.history.push(`/cart/${productId}?qty=${qty}?size=${size}`);
   };
   const submitHandler = (e) => {
     e.preventDefault();
@@ -49,6 +58,26 @@ export default function ProductScreen(props) {
       alert('Please enter comment and rating');
     }
   };
+  const handleChange = (event) => {
+    console.log(event)
+    console.log(props)
+    if(event ==='small'){
+      // this.setState({ fPrice: this.state.Sprice,size:setSize(event) }  
+      setSize(event)
+      setfPrice(Product.Sprice)
+    }else if(event ==='medium'){
+      // this.setState({ fPrice: this.state.Mprice,size:setSize(event) }  
+      // )      
+      setSize(event)
+      setfPrice(Product.Mprice)
+    }
+    else{
+      // this.setState({ fPrice: this.state.Lprice,size:setSize(event) }  
+      // )
+      setSize(event)
+      setfPrice(Product.Lprice)
+    }
+  }
   return (
     <div>
       {loading ? (
@@ -77,25 +106,26 @@ export default function ProductScreen(props) {
                     numReviews={product.numReviews}
                   ></Rating>
                 </li>
-                <li>Price : {product.price}/-</li>
-                <li>Dimensions Size-L: {product.Ldimension}</li>
-                <li>Dimensions Size-M: {product.Mdimension}</li>
-                <li>Dimensions Size-S: {product.Sdimension}</li>
-                <li>Material: {product.material}</li>
+                {/* <li><h4>Price :</h4> {product.price}/-</li> */}
+                {/* <li><h4>FPrice :</h4> {product.Fprice}/-</li> */}
+                <li><h4>Dimensions Size-L:</h4> {product.Ldimension}</li>
+                <li><h4>Size-M:</h4> {product.Mdimension}</li>
+                <li><h4>Size-S:</h4> {product.Sdimension}</li>
+                <li><h4>Material:</h4> {product.material}</li>
                 <li>
-                  Description:
+                <h4>Description:</h4>
                   <p>{product.description}</p>
                 </li>
                 <li>
-                  Instructions:
+                <h4>Instructions:</h4>
                   <p>{product.howToUse}</p>
                 </li>
                 <li>
-                Washing Tips:
+                <h4>Washing Tips:</h4>
                   <p>{product.WashingTips}</p>
                 </li>
                 <li>
-                Storage:
+                <h4>Storage:</h4>
                   <p>{product.Storage}</p>
                 </li>
               </ul>
