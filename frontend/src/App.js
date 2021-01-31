@@ -52,7 +52,8 @@ function App() {
   return (
     <BrowserRouter>
       <div className="grid-container">
-        <header className="row">
+        <header className="header row">
+          {/* <nav className="Nav"> */}
           <div>
             <button
               type="button"
@@ -138,6 +139,7 @@ function App() {
               </div>
             )}
           </div>
+          {/* </nav> */}
         </header>
         <aside className={sidebarIsOpen ? 'open' : ''}>
           <ul className="categories">
@@ -241,10 +243,37 @@ function App() {
 
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
-        <footer className="row center"><ul>
-          <li>All rights reserved</li>
-          <li>Contact:9182790633</li>
-          </ul></footer>
+        <footer className="row center">
+        <div className="row">
+                <div className="col span-1-of-2">
+                    <ul className="footer-nav">
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                        {/* <li><a href="#">iOS App</a></li> */}
+                        {/* <li><a href="#">Android App</a></li> */}
+                    </ul>
+                </div>
+                <div className="col span-1-of-2">
+                    <ul className="social-links">
+                        <li><a href="#"><i className="ion-social-facebook"></i></a></li>
+                        <li><a href="#"><i className="ion-social-twitter"></i></a></li>
+                        <li><a href="#"><i className="ion-social-googleplus"></i></a></li>
+                        <li><a href="#"><i className="ion-social-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div className="row">
+                <p>
+                    This webpage was created for the untitled Arts Earthenware.copyrights here.
+                </p>
+                <p>
+                    Build with 
+                    {/* <i className="ion-ios-heart" style="color: #ea0000; padding: 0 3px;"></i>  */}
+                    in the beautiful city of Bangalore.
+                </p>
+            </div>
+          </footer>
       </div>
     </BrowserRouter>
   );
