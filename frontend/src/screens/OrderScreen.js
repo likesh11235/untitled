@@ -76,13 +76,13 @@ export default function OrderScreen(props) {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div>
+    <div >
       <h1>Order {order._id}</h1>
       <div className="row top">
-        <div className="col-2">
+        <div className="col-2" id="white">
           <ul>
             <li>
-              <div className="card card-body">
+              <div className="card card-body"> 
                 <h2>Shipping</h2>
                 <p>
                   <strong>Name:</strong> {order.shippingAddress.fullName} <br />
@@ -120,8 +120,8 @@ export default function OrderScreen(props) {
                 <h2>Order Items</h2>
                 <ul>
                   {order.orderItems.map((item) => (
-                    <li key={item.product}>
-                      <div className="row">
+                    <li key={item.product} >
+                      <div className="row" id="white">
                         <div>
                           <img
                             src={item.image}
@@ -146,32 +146,32 @@ export default function OrderScreen(props) {
             </li>
           </ul>
         </div>
-        <div className="col-1">
+        <div className="col-1" id="white">
           <div className="card card-body">
             <ul>
               <li>
                 <h2>Order Summary</h2>
               </li>
               <li>
-                <div className="row">
+                <div className="row" id="white">
                   <div>Items</div>
                   <div>{order.itemsPrice.toFixed(2)}/-</div>
                 </div>
               </li>
               <li>
-                <div className="row">
+                <div className="row" id="white">
                   <div>Shipping</div>
                   <div>{order.shippingPrice.toFixed(2)}/-</div>
                 </div>
               </li>
               <li>
-                <div className="row">
+                <div className="row" id="white">
                   <div>Tax</div>
                   <div>{order.taxPrice.toFixed(2)}/-</div>
                 </div>
               </li>
               <li>
-                <div className="row">
+                <div className="row" id="white">
                   <div>
                     <strong> Order Total</strong>
                   </div>
