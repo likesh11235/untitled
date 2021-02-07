@@ -9,7 +9,7 @@ export default function PaymentMethodScreen(props) {
   if (!shippingAddress.address) {
     props.history.push('/shipping');
   }
-  const [paymentMethod, setPaymentMethod] = useState('PayPal');
+  const [paymentMethod, setPaymentMethod] = useState('COD');
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ export default function PaymentMethodScreen(props) {
         <div>
           <h1>Payment Method</h1>
         </div>
-        <div>
+        {/* <div>
           <div>
             <input
               type="radio"
@@ -36,7 +36,7 @@ export default function PaymentMethodScreen(props) {
             ></input>
             <label htmlFor="paypal">PayPal</label>
           </div>
-        </div>
+        </div> */}
         <div>
           <div>
             <input
