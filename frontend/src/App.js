@@ -28,6 +28,7 @@ import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import MapScreen from './screens/MapScreen';
+import AllProductsScreen from './screens/AllProductsScreen';
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -74,6 +75,9 @@ function App() {
             ></Route>
           </div>
           <div>
+            <Link to="/allproducts">
+              <span id="header-all-products">All Products</span>
+            </Link>
             <Link to="/cart">
               <span id="header-cart">Cart</span>
               {cartItems.length > 0 && (
@@ -144,7 +148,7 @@ function App() {
         <aside className={sidebarIsOpen ? 'open' : ''}>
           <ul className="categories">
             <li>
-              <strong>Categories</strong>
+              <h2>Categories</h2>
               <button
                 onClick={() => setSidebarIsOpen(false)}
                 className="close-sidebar"
@@ -159,7 +163,7 @@ function App() {
               <MessageBox variant="danger">{errorCategories}</MessageBox>
             ) : (
               categories.map((c) => (
-                <li key={c}>
+                <li className="pDetails" key={c}>
                   <Link
                     to={`/search/category/${c}`}
                     onClick={() => setSidebarIsOpen(false)}
@@ -172,6 +176,8 @@ function App() {
           </ul>
         </aside>
         <main>
+          <Route path="/allproducts" component={AllProductsScreen} exact></Route>
+          <Route path="/allproducts/pageNumber/:pageNumber" component={AllProductsScreen} exact></Route>
           <Route path="/seller/:id" component={SellerScreen}></Route>
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/product/:id" component={ProductScreen} exact></Route>
@@ -256,9 +262,9 @@ function App() {
                 <div className="col span-1-of-3">
                   <div className = "navFooterColHead">Connect with us</div>
                     <ul className="footer-nav">
-                        <li><a href="#features">Facebook</a></li>
-                        <li><a href="#instructions">Instagram</a></li>
-                        <li><a href="#instructions">Twitter</a></li>
+                        <li className="social-media"><a href="https://www.facebook.com/untitled.arts.18/"><img className="icons" src="/images/facebook.svg" alt="facebook"></img></a></li>
+                        <li className="social-media"><a href="https://www.instagram.com/untitleddotarts/"><img className="icons" src="/images/instagram.svg" alt="instagram"></img></a></li>
+                        <li className="social-media"><a href="https://twitter.com/untitleddotarts"><img className="icons" src="/images/twitter.svg" alt="twitter"></img></a></li>
                     </ul>
                 </div>
                 {/* <div className="col span-3-of-3">
@@ -278,6 +284,7 @@ function App() {
                     {/* <i className="ion-ios-heart" style="color: #ea0000; padding: 0 3px;"></i>  */}
                     {/* in the beautiful city of Bangalore. */}
                 </p>
+                <p><a id="white" href="mailto:untitleddotarts@gmail.com"><img className="social-media" src="/images/mail.svg" alt="mail"></img>untitleddotarts@gmail.com</a></p>
             </div>
           </footer>
       </div>

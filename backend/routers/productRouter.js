@@ -10,7 +10,7 @@ const productRouter = express.Router();
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    const pageSize = 3;
+    const pageSize = Number(req.query.pageSize) || 4;
     const page = Number(req.query.pageNumber) || 1;
     const name = req.query.name || '';
     const category = req.query.category || '';
@@ -111,7 +111,7 @@ productRouter.post(
     const product = new Product({
       name: 'sample name ' + Date.now(),
       seller: req.user._id,
-      image: '/images/p1.jpg',
+      image: '/uploads/',
       // price: 0,
       category: 'Decoration Utensil',
       brand: 'sample brand',

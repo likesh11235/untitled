@@ -81,7 +81,7 @@ export default function OrderScreen(props) {
       <div className="row top">
         <div className="col-2" id="white">
           <ul>
-            <li>
+            <li className="pDetails">
               <div className="card card-body"> 
                 <h2>Shipping</h2>
                 <p>
@@ -100,7 +100,7 @@ export default function OrderScreen(props) {
                 )}
               </div>
             </li>
-            <li>
+            <li className="pDetails">
               <div className="card card-body">
                 <h2>Payment</h2>
                 <p>
@@ -115,12 +115,12 @@ export default function OrderScreen(props) {
                 )}
               </div>
             </li>
-            <li>
+            <li className="pDetails">
               <div className="card card-body">
                 <h2>Order Items</h2>
                 <ul>
                   {order.orderItems.map((item) => (
-                    <li key={item.product} >
+                    <li className="pDetails" key={item.product} >
                       <div className="row" id="white">
                         <div>
                           <img
@@ -131,7 +131,7 @@ export default function OrderScreen(props) {
                         </div>
                         <div className="min-30">
                           <Link to={`/product/${item.product}`}>
-                            {item.name}
+                            <p id="white" className="pDetails">{item.name}</p>
                           </Link>
                         </div>
 
@@ -152,25 +152,25 @@ export default function OrderScreen(props) {
               <li>
                 <h2>Order Summary</h2>
               </li>
-              <li>
+              <li className="pDetails">
                 <div className="row" id="white">
                   <div>Items</div>
                   <div>{order.itemsPrice.toFixed(2)}/-</div>
                 </div>
               </li>
-              <li>
+              <li className="pDetails">
                 <div className="row" id="white">
                   <div>Shipping</div>
                   <div>{order.shippingPrice.toFixed(2)}/-</div>
                 </div>
               </li>
-              <li>
+              <li className="pDetails">
                 <div className="row" id="white">
                   <div>Tax</div>
                   <div>{order.taxPrice.toFixed(2)}/-</div>
                 </div>
               </li>
-              <li>
+              <li className="pDetails">
                 <div className="row" id="white">
                   <div>
                     <strong> Order Total</strong>

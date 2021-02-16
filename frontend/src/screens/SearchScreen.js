@@ -78,7 +78,7 @@ export default function SearchScreen(props) {
         </div>
       </div>
       <div className="row top">
-        <div className="col-1">
+        <div className="col-1 right-border">
           <h3>Department</h3>
           <div>
             {loadingCategories ? (
@@ -87,7 +87,7 @@ export default function SearchScreen(props) {
               <MessageBox variant="danger">{errorCategories}</MessageBox>
             ) : (
               <ul>
-                <li>
+                <li className="pDetails">
                   <Link
                     className={'all' === category ? 'active' : ''}
                     to={getFilterUrl({ category: 'all' })}
@@ -96,7 +96,7 @@ export default function SearchScreen(props) {
                   </Link>
                 </li>
                 {categories.map((c) => (
-                  <li key={c}>
+                  <li className="pDetails" key={c}>
                     <Link
                       className={c === category ? 'active' : ''}
                       to={getFilterUrl({ category: c })}
@@ -112,7 +112,7 @@ export default function SearchScreen(props) {
             <h3>Price</h3>
             <ul>
               {prices.map((p) => (
-                <li key={p.name}>
+                <li className="pDetails" key={p.name}>
                   <Link
                     to={getFilterUrl({ min: p.min, max: p.max })}
                     className={
@@ -129,7 +129,7 @@ export default function SearchScreen(props) {
             <h3>Avg. Customer Review</h3>
             <ul>
               {ratings.map((r) => (
-                <li key={r.name}>
+                <li id="black" key={r.name}>
                   <Link
                     to={getFilterUrl({ rating: r.rating })}
                     className={`${r.rating}` === `${rating}` ? 'active' : ''}

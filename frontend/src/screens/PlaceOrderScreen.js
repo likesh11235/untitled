@@ -9,6 +9,7 @@ import MessageBox from '../components/MessageBox';
 
 export default function PlaceOrderScreen(props) {
   const cart = useSelector((state) => state.cart);
+  // console.log(cart);
   if (!cart.paymentMethod) {
     props.history.push('/payment');
   }
@@ -40,7 +41,7 @@ export default function PlaceOrderScreen(props) {
             <li>
               <div className="card card-body">
                 <h2>Shipping</h2>
-                <p>
+                <p className="pDetails">
                   <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
                   <strong>Address: </strong> {cart.shippingAddress.address},
                   {cart.shippingAddress.city}, {cart.shippingAddress.postalCode}
@@ -51,7 +52,7 @@ export default function PlaceOrderScreen(props) {
             <li>
               <div className="card card-body" >
                 <h2>Payment</h2>
-                <p>
+                <p className="pDetails">
                   <strong>Method:</strong> {cart.paymentMethod}
                 </p>
               </div>
@@ -71,12 +72,12 @@ export default function PlaceOrderScreen(props) {
                           ></img>
                         </div>
                         <div className="min-30">
-                          <Link to={`/product/${item.product}`}>
-                            {item.name}
+                          <Link  id="white" to={`/product/${item.product}`}>
+                            <p className="pDetails">{item.name}</p>
                           </Link>
                         </div>
 
-                        <div>
+                        <div className="pDetails">
                           {item.qty} x {item.price}/- = {item.qty * item.price}/-
                         </div>
                       </div>
@@ -93,25 +94,25 @@ export default function PlaceOrderScreen(props) {
               <li>
                 <h2>Order Summary</h2>
               </li>
-              <li>
+              <li className="pDetails">
                 <div className="row" id="white">
                   <div>Items</div>
                   <div>{cart.itemsPrice.toFixed(2)}/-</div>
                 </div>
               </li>
-              <li>
+              <li className="pDetails">
                 <div className="row" id="white">
                   <div>Shipping</div>
                   <div>{cart.shippingPrice.toFixed(2)}/-</div>
                 </div>
               </li>
-              <li>
+              <li className="pDetails">
                 <div className="row" id="white">
                   <div>Tax</div>
                   <div>{cart.taxPrice.toFixed(2)}/-</div>
                 </div>
               </li>
-              <li>
+              <li className="pDetails">
                 <div className="row" id="white">
                   <div>
                     <strong> Order Total</strong>

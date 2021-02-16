@@ -29,6 +29,7 @@ export default function ProductEditScreen(props) {
   const [Lstock, setLstock] = useState('');
   const [Mstock, setMstock] = useState('');
   const [Sstock, setSstock] = useState('');
+  let [count, setCount] = useState(0);
   const [lid, setLid] = useState('');
   const [painted, setPainted] = useState('');
   // const [Sstock, setSstock] = useState('');
@@ -116,10 +117,13 @@ export default function ProductEditScreen(props) {
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+  let allImages = '';
+  
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append('image', file);
+    // console.log(file);
     setLoadingUpload(true);
     try {
       const { data } = await Axios.post('/api/uploads', bodyFormData, {
@@ -128,7 +132,16 @@ export default function ProductEditScreen(props) {
           Authorization: `Bearer ${userInfo.token}`,
         },
       });
-      setImage(data);
+      if(count==0){
+        allImages="/uploads/"+file.name+"|";
+      }else{
+        allImages=image+"/uploads/"+file.name+"|";
+      }
+      count++;
+      setCount(count);
+      
+      setImage(allImages);
+
       setLoadingUpload(false);
     } catch (error) {
       setErrorUpload(error.message);
@@ -197,7 +210,8 @@ export default function ProductEditScreen(props) {
                 id="image"
                 type="text"
                 placeholder="Enter image"
-                value={image}
+                value={image || ''}
+                // readOnly
                 onChange={(e) => setImage(e.target.value)}
               ></input>
             </div>
@@ -208,6 +222,7 @@ export default function ProductEditScreen(props) {
                 id="imageFile"
                 label="Choose Image"
                 onChange={uploadFileHandler}
+                multiple
               ></input>
               {loadingUpload && <LoadingBox></LoadingBox>}
               {errorUpload && (

@@ -60,9 +60,9 @@ export default function Rating(props) {
         ></i>
       </span>
       {caption ? (
-        <span>{caption}</span>
+        <span id="black">{caption}</span>
       ) : (
-        <span>{numReviews + ' reviews'}</span>
+        <span id="black">{numReviews + ' reviews'}</span>
       )}
     </div>
   );
