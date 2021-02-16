@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Carousel } from 'react-responsive-carousel';
 import { createReview, detailsProduct } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -8,17 +10,25 @@ import Rating from '../components/Rating';
 import { PRODUCT_REVIEW_CREATE_RESET } from '../constants/productConstants';
 import Product from '../components/Product';
 
+
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
   const productId = props.match.params.id;
   const [qty, setQty] = useState(1);
-
   const [size, setSize] = useState('small');
   const productDetails = useSelector((state) => state.productDetails);
-  console.log(productDetails)
   const { loading, error, product } = productDetails;
-  console.log(product)
-  const [fPrice, setfPrice] = useState(350)
+  // console.log(product);
+  let imagePath = [];
+  if(product){
+    imagePath = product.image.split('|');    
+  }
+  if(imagePath.length>1){
+    imagePath.pop();
+  }
+  
+  // imagePath = product.image || '';
+  const [price, setPrice] = useState(250);
   // useState(product.Sprice);
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -35,6 +45,7 @@ export default function ProductScreen(props) {
 
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
+  
 
   useEffect(() => {
     if (successReviewCreate) {
@@ -46,7 +57,16 @@ export default function ProductScreen(props) {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId, successReviewCreate]);
   const addToCartHandler = () => {
-    props.history.push(`/cart/${productId}?qty=${qty}?size=${size}`);
+    let p = price;
+    if(size ==='small'){
+      p=product.Sprice;
+    }else if(size ==='medium'){
+      p=product.Mprice;
+    }
+    else{
+      p=product.Lprice;
+    }
+    props.history.push(`/cart/${productId}?qty=${qty}?size=${size}?price=${p}`);
   };
   const submitHandler = (e) => {
     e.preventDefault();
@@ -58,26 +78,27 @@ export default function ProductScreen(props) {
       alert('Please enter comment and rating');
     }
   };
-  const handleChange = (event) => {
-    console.log(event)
-    console.log(props)
-    if(event ==='small'){
-      // this.setState({ fPrice: this.state.Sprice,size:setSize(event) }  
-      setSize(event)
-      setfPrice(Product.Sprice)
-    }else if(event ==='medium'){
-      // this.setState({ fPrice: this.state.Mprice,size:setSize(event) }  
-      // )      
-      setSize(event)
-      setfPrice(Product.Mprice)
-    }
-    else{
-      // this.setState({ fPrice: this.state.Lprice,size:setSize(event) }  
-      // )
-      setSize(event)
-      setfPrice(Product.Lprice)
-    }
-  }
+  // const handleChange = () => {
+    
+  //   console.log("allo");
+  //   if(size ==='small'){
+  //     // this.setState({ fPrice: this.state.Sprice,size:setSize(event) }  
+  //     // setSize(event)
+  //     console.log("allo");
+  //     setPrice(Product.Sprice)
+  //   }else if(size ==='medium'){
+  //     // this.setState({ fPrice: this.state.Mprice,size:setSize(event) }  
+  //     // )      
+  //     // setSize(event)
+  //     setPrice(Product.Mprice)
+  //   }
+  //   else{
+  //     // this.setState({ fPrice: this.state.Lprice,size:setSize(event) }  
+  //     // )
+  //     // setSize(event)
+  //     setPrice(Product.Lprice)
+  //   }
+  // }
   return (
     <div>
       {loading ? (
@@ -89,11 +110,19 @@ export default function ProductScreen(props) {
           <Link to="/"><div id="back-to-result">Back to result</div></Link>
           <div className="row top">
             <div className="col-2">
-              <img
+              
+            {/* <img
                 className="large"
                 src={product.image}
                 alt={product.name}
-              ></img>
+              ></img> */}
+              <Carousel centerSlidePercentage="100" emulateTouch useKeyboardArrows stopOnHover swipeable dynamicHeight showArrows autoPlay infiniteLoop showThumbs>
+                {imagePath.map((path) => (
+                  <div className="carousel-inner"  key={product.id}>
+                      <img  className="carousel-img" width="100%" src={path} alt={product.name} />
+                  </div>
+                ))}
+              </Carousel>
             </div>
             <div className="col-1">
               <ul>
@@ -108,15 +137,15 @@ export default function ProductScreen(props) {
                 </li>
                 {/* <li><h4>Price :</h4> {product.price}/-</li> */}
                 {/* <li><h4>FPrice :</h4> {product.Fprice}/-</li> */}
-                <li><h4>Dimensions Size-L:</h4> {product.Ldimension}</li>
-                <li><h4>Size-M:</h4> {product.Mdimension}</li>
-                <li><h4>Size-S:</h4> {product.Sdimension}</li>
-                <li><h4>Material:</h4> {product.material}</li>
+                <li className="pDetails"><h2>Dimensions Size-L:</h2> {product.Ldimension}</li>
+                <li className="pDetails"><h2>Size-M:</h2> {product.Mdimension}</li>
+                <li className="pDetails"><h2>Size-S:</h2> {product.Sdimension}</li>
+                <li className="pDetails"><h2>Material:</h2> {product.material}</li>
                 <li>
-                <h4>Description:</h4>
-                  <p>{product.description}</p>
+                <h2>Description:</h2>
+                  <p className="pDetails">{product.description}</p>
                 </li>
-                <li>
+                {/* <li>
                 <h4>Instructions:</h4>
                   <p>{product.howToUse}</p>
                 </li>
@@ -127,25 +156,25 @@ export default function ProductScreen(props) {
                 <li>
                 <h4>Storage:</h4>
                   <p>{product.Storage}</p>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div className="col-1">
               <div className="card card-body">
                 <ul>
                   <li>
-                    <span id="seller">Seller{' '}</span>
-                    <h2>
+                    {/* <span id="seller">Seller{' '}</span> */}
+                    {/* <h2>
                       <Link to={`/seller/${product.seller._id}`}>
                         {product.seller.seller.name}
                       </Link>
-                    </h2>
-                    <Rating
+                    </h2> */}
+                    {/* <Rating
                       rating={product.seller.seller.rating}
                       numReviews={product.seller.seller.numReviews}
-                    ></Rating>
+                    ></Rating> */}
                   </li>
-                  <li>
+                  <li className="pDetails">
                     <div className="row" id="white">
                       <div>Price</div>
                       {size ==='small' &&
@@ -156,7 +185,7 @@ export default function ProductScreen(props) {
                       <div className="price">{product.Lprice}/-</div>}
                     </div>
                   </li>
-                  <li>
+                  <li className="pDetails">
                     <div className="row" id="white">
                       <div>Status</div>
                       <div>
@@ -170,7 +199,7 @@ export default function ProductScreen(props) {
                   </li>
                   {product.countInStock > 0 && (
                     <>
-                      <li>
+                      <li className="pDetails">
                         <div className="row" id="white">
                           <div>Qty</div>
                           <div>
@@ -189,7 +218,7 @@ export default function ProductScreen(props) {
                           </div>
                         </div>
                       </li>
-                      <li>
+                      <li className="pDetails">
                         <div className="row" id="white">
                           <div>Size</div>
                           <div>
@@ -212,7 +241,7 @@ export default function ProductScreen(props) {
                       </li>
                       <li>
                         <button
-                          onClick={addToCartHandler}
+                          onClick={addToCartHandler }
                           className="primary block"
                         >
                           Add to Cart

@@ -28,6 +28,7 @@ import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import MapScreen from './screens/MapScreen';
+import AllProductsScreen from './screens/AllProductsScreen';
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -52,7 +53,8 @@ function App() {
   return (
     <BrowserRouter>
       <div className="grid-container">
-        <header className="row">
+        <header className="header row">
+          {/* <nav className="Nav"> */}
           <div>
             <button
               type="button"
@@ -73,6 +75,9 @@ function App() {
             ></Route>
           </div>
           <div>
+            <Link to="/allproducts">
+              <span id="header-all-products">All Products</span>
+            </Link>
             <Link to="/cart">
               <span id="header-cart">Cart</span>
               {cartItems.length > 0 && (
@@ -138,11 +143,12 @@ function App() {
               </div>
             )}
           </div>
+          {/* </nav> */}
         </header>
         <aside className={sidebarIsOpen ? 'open' : ''}>
           <ul className="categories">
             <li>
-              <strong>Categories</strong>
+              <h2>Categories</h2>
               <button
                 onClick={() => setSidebarIsOpen(false)}
                 className="close-sidebar"
@@ -157,7 +163,7 @@ function App() {
               <MessageBox variant="danger">{errorCategories}</MessageBox>
             ) : (
               categories.map((c) => (
-                <li key={c}>
+                <li className="pDetails" key={c}>
                   <Link
                     to={`/search/category/${c}`}
                     onClick={() => setSidebarIsOpen(false)}
@@ -170,6 +176,8 @@ function App() {
           </ul>
         </aside>
         <main>
+          <Route path="/allproducts" component={AllProductsScreen} exact></Route>
+          <Route path="/allproducts/pageNumber/:pageNumber" component={AllProductsScreen} exact></Route>
           <Route path="/seller/:id" component={SellerScreen}></Route>
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/product/:id" component={ProductScreen} exact></Route>
@@ -241,10 +249,44 @@ function App() {
 
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
-        <footer className="row center" id="white"><ul>
-          <li>All rights reserved</li>
-          <li>Contact:9182790633</li>
-          </ul></footer>
+        <footer className="row center">
+        <div className="row">
+                <div className="col span-1-of-3">
+                  <div className = "navFooterColHead">Get to Know us</div>
+                    <ul className="footer-nav">
+                        <li><a href="#features">About us</a></li>
+                        <li><a href="#instructions">Instructions</a></li>
+                        <li><a href="#Products">Products</a></li>
+                    </ul>
+                </div>
+                <div className="col span-1-of-3">
+                  <div className = "navFooterColHead">Connect with us</div>
+                    <ul className="footer-nav">
+                        <li className="social-media"><a href="https://www.facebook.com/untitled.arts.18/"><img className="icons" src="/images/facebook.svg" alt="facebook"></img></a></li>
+                        <li className="social-media"><a href="https://www.instagram.com/untitleddotarts/"><img className="icons" src="/images/instagram.svg" alt="instagram"></img></a></li>
+                        <li className="social-media"><a href="https://twitter.com/untitleddotarts"><img className="icons" src="/images/twitter.svg" alt="twitter"></img></a></li>
+                    </ul>
+                </div>
+                {/* <div className="col span-3-of-3">
+                    <ul className="social-links">
+                        <li><a href="#"><i className="ion-social-facebook"></i></a></li>
+                        <li><a href="#"><i className="ion-social-twitter"></i></a></li>
+                        <li><a href="#"><i className="ion-social-googleplus"></i></a></li>
+                        <li><a href="#"><i className="ion-social-instagram"></i></a></li>
+                    </ul>
+                </div> */}
+            </div>
+            <div className="col span-3-of-3">
+                <p>
+                    This website was created by the untitled Arts Earthenware.
+                    copyrights UntitledArts.com, Inc.or its affiliates. 
+                    {/* Build with  */}
+                    {/* <i className="ion-ios-heart" style="color: #ea0000; padding: 0 3px;"></i>  */}
+                    {/* in the beautiful city of Bangalore. */}
+                </p>
+                <p><a id="white" href="mailto:untitleddotarts@gmail.com"><img className="social-media" src="/images/mail.svg" alt="mail"></img>untitleddotarts@gmail.com</a></p>
+            </div>
+          </footer>
       </div>
     </BrowserRouter>
   );

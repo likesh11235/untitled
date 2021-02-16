@@ -11,10 +11,15 @@ export default function CartScreen(props) {
   if (qStr!==1){
     qty = qStr.split('?')[0] ?qStr.split('?')[0]:1
   }
-  const Psize = props.location.search
+  const PsizeArr = props.location.search
     ? props.location.search.split('=')[2]
     : 'small';
+  
+  const Psize = PsizeArr.split('?')[0];
+
+  const Pprice = props.location.search.split('=')[3];
   const [size, setSize] = useState(Psize);
+  const [price, setPrice] = useState(Pprice);
   const cart = useSelector((state) => state.cart);
   const { cartItems, error } = cart;
   const dispatch = useDispatch();
@@ -28,7 +33,6 @@ export default function CartScreen(props) {
     // delete action
     dispatch(removeFromCart(id));
   };
-
   const checkoutHandler = () => {
     props.history.push('/signin?redirect=shipping');
   };
@@ -60,9 +64,19 @@ export default function CartScreen(props) {
                   <div>
                             <select
                               value={item.size}
-                              onChange={(e) => dispatch(
-                                addToCart(item.product, item.qty, e.target.value)
-                              )}
+                              onChange={(e) => {
+                                let p = price;
+                                if(e.target.value ==='small'){
+                                  p=item.Sprice;
+                                }else if(e.target.value ==='medium'){
+                                  p=item.Mprice;
+                                }
+                                else{
+                                  p=item.Lprice;
+                                }
+                                dispatch(
+                                addToCart(item.product, item.qty, e.target.value,p))
+                              }}
                             >
                                   <option  value={'small'}>
                                     Small

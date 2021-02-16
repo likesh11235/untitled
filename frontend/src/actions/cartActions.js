@@ -7,8 +7,18 @@ import {
   CART_ADD_ITEM_FAIL,
 } from '../constants/cartConstants';
 
-export const addToCart = (productId, qty,size) => async (dispatch, getState) => {
+export const addToCart = (productId, qty,size,Pprice) => async (dispatch, getState) => {
+  // console.log(Pprice);
   const { data } = await Axios.get(`/api/products/${productId}`);
+  let price=0;
+  if(size ==='small'){
+    price=data.Sprice;
+  }else if(size ==='medium'){
+    price=data.Mprice;
+  }
+  else{
+    price=data.Lprice;
+  }
   const {
     cart: { cartItems },
   } = getState();
@@ -23,7 +33,6 @@ export const addToCart = (productId, qty,size) => async (dispatch, getState) => 
       payload: {
         name: data.name,
         image: data.image,
-        price: data.price,
         Sprice:data.Sprice,
         Mprice:data.Mprice,
         Lprice:data.Lprice,
@@ -32,6 +41,7 @@ export const addToCart = (productId, qty,size) => async (dispatch, getState) => 
         seller: data.seller,
         qty,
         size,
+        price: price,
       },
     });
     localStorage.setItem(

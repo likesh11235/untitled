@@ -22,6 +22,7 @@ import {
   PRODUCT_REVIEW_CREATE_SUCCESS,
   PRODUCT_REVIEW_CREATE_FAIL,
 } from '../constants/productConstants';
+import data from '../data';
 
 export const listProducts = ({
   pageNumber = '',
@@ -32,13 +33,15 @@ export const listProducts = ({
   min = 0,
   max = 0,
   rating = 0,
+  pageSize = '',
+
 }) => async (dispatch) => {
   dispatch({
     type: PRODUCT_LIST_REQUEST,
   });
   try {
     const { data } = await Axios.get(
-      `/api/products?pageNumber=${pageNumber}&seller=${seller}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`
+      `/api/products?pageSize=${pageSize}&pageNumber=${pageNumber}&seller=${seller}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`
     );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -74,6 +77,7 @@ export const detailsProduct = (productId) => async (dispatch) => {
   }
 };
 export const createProduct = () => async (dispatch, getState) => {
+  
   dispatch({ type: PRODUCT_CREATE_REQUEST });
   const {
     userSignin: { userInfo },
@@ -85,7 +89,9 @@ export const createProduct = () => async (dispatch, getState) => {
       {
         headers: { Authorization: `Bearer ${userInfo.token}` },
       }
+      
     );
+    console.log(data);
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,
       payload: data.product,
