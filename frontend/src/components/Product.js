@@ -18,7 +18,7 @@ export default function Product(props) {
     <Tilt className="Tilt" options={{ max : 50 }} >
       <div key={product._id} className="Tilt-inner" className="card" >
         <Link to={`/product/${product._id}`}>
-          <img height="300px" width="300px" className="medium" src={image} alt={product.name} />
+          <img min-height="300px" min-width="300px" className="medium" src={image} alt={product.name} />
         </Link>
         <div className="card-body">
           <Link to={`/product/${product._id}`}>
