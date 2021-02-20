@@ -1305,3 +1305,7 @@ marquee{
 .right-border{
 	border-right: solid 2px #202020;
 }
+
+.productName{
+	width: 300px;
+}
