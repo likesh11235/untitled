@@ -23,6 +23,7 @@ export default function AllProductsScreen() {
                 <MessageBox variant="danger">{error}</MessageBox>
             ) : (
                 <>
+                <marquee align="middle" width="60%" direction="right">For <strong>Bulk Orders</strong> you can contact us!</marquee>
                 {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
                 <div className="row center">
                     {products.map((product) => (

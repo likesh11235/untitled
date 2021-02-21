@@ -330,7 +330,7 @@ img.large {
   color: yellow;
 }
 .danger {
-  color: black;
+  color: #ffffff;
 }
 .alert {
   padding: 1rem;
@@ -1307,5 +1307,5 @@ marquee{
 }
 
 .productName{
-	width: 300px;
+	width: 27rem;
 }
