@@ -27,7 +27,7 @@ export default function AllProductsScreen() {
                 {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
                 <div className="row center">
                     {products.map((product) => (
-                    <Product key={product._id} product={product}></Product>
+                    <Product id="white" key={product._id} product={product}></Product>
                     ))}
                 </div>
                 <div className="row center pagination">

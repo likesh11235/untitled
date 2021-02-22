@@ -22,6 +22,10 @@ export default function CartScreen(props) {
   const [price, setPrice] = useState(Pprice);
   const cart = useSelector((state) => state.cart);
   const { cartItems, error } = cart;
+  // console.log(cart);
+  // const productDetails = useSelector((state) => state.productDetails);
+  // const { loading,product } = productDetails;
+  // console.log(loading, product)
   const dispatch = useDispatch();
   useEffect(() => {
     if (productId) {
@@ -48,10 +52,10 @@ export default function CartScreen(props) {
         ) : (
           <ul>
             {cartItems.map((item) => (
-              
               <li key={item.product}>
                 <div className="row">
                   <div>
+                    {/* {console.log(item)} */}
                     <img
                       src={item.image}
                       alt={item.name}
@@ -59,10 +63,11 @@ export default function CartScreen(props) {
                     ></img>
                   </div>
                   <div className="min-30" >
-                    <Link to={`/product/${item.product}`}><span id="black">{item.name}</span></Link>
+                    <Link to={`/product/${item.product}`}><span id="black" className="pDetails">{item.name}</span></Link>
                   </div>
                   <div>
-                            <select
+                    <div className="pDetails">{item.size}</div>
+                            {/* <select
                               value={item.size}
                               onChange={(e) => {
                                 let p = price;
@@ -78,19 +83,32 @@ export default function CartScreen(props) {
                                 addToCart(item.product, item.qty, e.target.value,p))
                               }}
                             >
+                                  {item.Sprice>0 && (
+                                <>
                                   <option  value={'small'}>
                                     Small
                                   </option>
+                                </>
+                              )}
+                              {item.Mprice>0 && (
+                                <>
                                   <option  value={'medium'}>
-                                  Medium
-                                </option>
+                                    Medium
+                                  </option>
+                                </>
+                              )}
+                              {item.Lprice>0 && (
+                                <>
                                   <option  value={'large'}>
-                                  Large
-                                </option>
-                            </select>
+                                    Large
+                                  </option>
+                                </>
+                              )}
+                            </select> */}
                           </div>
                   <div>
-                    <select
+                    <div className="pDetails">{item.qty}</div>
+                    {/* <select
                       value={item.qty}
                       onChange={(e) =>
                         dispatch(
@@ -103,7 +121,7 @@ export default function CartScreen(props) {
                           {x + 1}
                         </option>
                       ))}
-                    </select>
+                    </select> */}
                   </div>
                   <div>
                   {item.size ==='small' &&

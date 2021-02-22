@@ -58,11 +58,13 @@ export default function HomeScreen() {
           {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
           <div className="row center">
             {products.map((product) => (
-              <Product key={product._id} product={product}></Product>
+              <Product id="white" key={product._id} product={product}></Product>
             ))}
           </div>
         </>
       )}  
+      
+
            <section className="section-features js--section-features" id="features">
             <div className="row">
                 <h2>Health is Wealth &mdash;Let us earn you that</h2>

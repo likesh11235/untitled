@@ -49,6 +49,7 @@ export default function SellerScreen(props) {
             </li>
             <li>
               <Rating
+                id="black"
                 rating={user.seller.rating}
                 numReviews={user.seller.numReviews}
               ></Rating>
@@ -70,7 +71,7 @@ export default function SellerScreen(props) {
             {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
             <div className="row center">
               {products.map((product) => (
-                <Product key={product._id} product={product}></Product>
+                <Product id="white" key={product._id} product={product}></Product>
               ))}
             </div>
           </>

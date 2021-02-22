@@ -4,7 +4,7 @@ import Rating from './Rating';
 import Tilt from 'react-tilt';
 
 export default function Product(props) {
-  const { product } = props;
+  const { product, id } = props;
   const allImages = product.image;
   let path=[];
   let image = '';
@@ -25,11 +25,12 @@ export default function Product(props) {
             <h2 className="productName" >{product.name}</h2>
           </Link>
           <Rating
+            id = {id}
             rating={product.rating}
             numReviews={product.numReviews}
           ></Rating>
           <div className="row">
-            <div id="white" className="price">{product.Sprice}/-</div>
+            <div id={id} className="price">{product.Sprice}/-</div>
             <div>
               {/* <Link to={`/seller/${product.seller._id}`}>
                 {product.seller.seller.name}
