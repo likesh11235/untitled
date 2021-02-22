@@ -18,11 +18,12 @@ export default function ProductScreen(props) {
   const [size, setSize] = useState('small');
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
-  // console.log(product);
+  
   let imagePath = [];
   if(product){
     imagePath = product.image.split('|');    
   }
+  // to remove extra '|'
   if(imagePath.length>1){
     imagePath.pop();
   }
@@ -45,7 +46,6 @@ export default function ProductScreen(props) {
 
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
-  
 
   useEffect(() => {
     if (successReviewCreate) {
@@ -131,15 +131,29 @@ export default function ProductScreen(props) {
                 </li>
                 <li>
                   <Rating
+                    id="black"
                     rating={product.rating}
                     numReviews={product.numReviews}
                   ></Rating>
                 </li>
                 {/* <li><h4>Price :</h4> {product.price}/-</li> */}
                 {/* <li><h4>FPrice :</h4> {product.Fprice}/-</li> */}
-                <li className="pDetails"><h2>Dimensions Size-L:</h2> {product.Ldimension}</li>
-                <li className="pDetails"><h2>Size-M:</h2> {product.Mdimension}</li>
-                <li className="pDetails"><h2>Size-S:</h2> {product.Sdimension}</li>
+                <h2>Dimensions</h2>
+                {product.Lprice>0 && (
+                  <>
+                    <li className="pDetails"><h2>Size-L:</h2> {product.Ldimension}</li>
+                  </>
+                )}
+                {product.Mprice>0 && (
+                  <>
+                    <li className="pDetails"><h2>Size-M:</h2> {product.Mdimension}</li>
+                  </>
+                )}
+                {product.Sprice>0 && (
+                  <>
+                    <li className="pDetails"><h2>Size-S:</h2> {product.Sdimension}</li>
+                  </>
+                )}
                 <li className="pDetails"><h2>Material:</h2> {product.material}</li>
                 <li>
                 <h2>Description:</h2>
@@ -189,7 +203,8 @@ export default function ProductScreen(props) {
                     <div className="row" id="white">
                       <div>Status</div>
                       <div id="white">
-                        {product.countInStock > 0 ? (
+                        
+                        {(product.Sstock > 0 || product.Mstock > 0 || product.Lstock > 0) ? (
                           <span className="success">In Stock</span>
                         ) : (
                           <span className="danger">Unavailable</span>
@@ -197,7 +212,7 @@ export default function ProductScreen(props) {
                       </div>
                     </div>
                   </li>
-                  {product.countInStock > 0 && (
+                  {(product.Sstock > 0 || product.Mstock > 0 || product.Lstock > 0) && (
                     <>
                       <li className="pDetails">
                         <div className="row" id="white">
@@ -207,7 +222,11 @@ export default function ProductScreen(props) {
                               value={qty}
                               onChange={(e) => setQty(e.target.value)}
                             >
-                              {[...Array(product.LStock).keys()].map(
+                              
+                              {[...Array(size == "small" 
+                              ? product.Sstock : size == "medium" 
+                              ? product.Mstock : product.Lstock)
+                              .keys()].map(
                                 (x) => (
                                   <option key={x + 1} value={x + 1}>
                                     {x + 1}
@@ -226,7 +245,28 @@ export default function ProductScreen(props) {
                               value={size}
                               onChange={(e) => setSize(e.target.value)}
                             >
+                              {product.Sstock>0 && (
+                                <>
                                   <option  value={'small'}>
+                                    Small
+                                  </option>
+                                </>
+                              )}
+                              {product.Mstock>0 && (
+                                <>
+                                  <option  value={'medium'}>
+                                    Medium
+                                  </option>
+                                </>
+                              )}
+                              {product.Lstock>0 && (
+                                <>
+                                  <option  value={'large'}>
+                                    Large
+                                  </option>
+                                </>
+                              )}
+                                  {/* <option  value={'small'}>
                                     Small
                                   </option>
                                   <option  value={'medium'}>
@@ -234,7 +274,7 @@ export default function ProductScreen(props) {
                                 </option>
                                   <option  value={'large'}>
                                   Large
-                                </option>
+                                </option> */}
                             </select>
                           </div>
                         </div>

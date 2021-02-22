@@ -134,7 +134,7 @@ export default function SearchScreen(props) {
                     to={getFilterUrl({ rating: r.rating })}
                     className={`${r.rating}` === `${rating}` ? 'active' : ''}
                   >
-                    <Rating caption={' & up'} rating={r.rating}></Rating>
+                    <Rating id="black" caption={' & up'} rating={r.rating}></Rating>
                   </Link>
                 </li>
               ))}
@@ -153,7 +153,7 @@ export default function SearchScreen(props) {
               )}
               <div className="row center">
                 {products.map((product) => (
-                  <Product key={product._id} product={product}></Product>
+                  <Product id="white" key={product._id} product={product}></Product>
                 ))}
               </div>
               <div className="row center pagination">
