@@ -1308,4 +1308,7 @@ marquee{
 
 .productName{
 	width: 27rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
