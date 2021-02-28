@@ -91,7 +91,7 @@ export const createProduct = () => async (dispatch, getState) => {
       }
       
     );
-    console.log(data);
+    // console.log(data);
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,
       payload: data.product,

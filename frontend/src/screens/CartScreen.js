@@ -22,6 +22,9 @@ export default function CartScreen(props) {
   const [price, setPrice] = useState(Pprice);
   const cart = useSelector((state) => state.cart);
   const { cartItems, error } = cart;
+  let path=[];
+  let image = '';
+  
   // console.log(cart);
   // const productDetails = useSelector((state) => state.productDetails);
   // const { loading,product } = productDetails;
@@ -33,9 +36,9 @@ export default function CartScreen(props) {
     }
   }, [dispatch, productId, qty,size]);
 
-  const removeFromCartHandler = (id) => {
+  const removeFromCartHandler = (id,size) => {
     // delete action
-    dispatch(removeFromCart(id));
+    dispatch(removeFromCart(id,size));
   };
   const checkoutHandler = () => {
     props.history.push('/signin?redirect=shipping');
@@ -51,13 +54,17 @@ export default function CartScreen(props) {
           </MessageBox>
         ) : (
           <ul>
-            {cartItems.map((item) => (
+            {cartItems.map((item) => (        
               <li key={item.product}>
+                {path=[]}
+                {(()=>{if(item.image)path=item.image.split('|')})()}
+                {(()=>{image=path[0]})()}
                 <div className="row">
                   <div>
-                    {/* {console.log(item)} */}
+                    
+                    {/* {console.log(image)} */}
                     <img
-                      src={item.image}
+                      src={image}
                       alt={item.name}
                       className="small"
                     ></img>
@@ -134,7 +141,7 @@ export default function CartScreen(props) {
                   <div>
                     <button
                       type="button"
-                      onClick={() => removeFromCartHandler(item.product)}
+                      onClick={() => removeFromCartHandler(item.product, item.size)}
                     >
                       Delete
                     </button>
