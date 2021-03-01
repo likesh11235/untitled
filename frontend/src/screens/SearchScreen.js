@@ -92,7 +92,7 @@ export default function SearchScreen(props) {
                     className={'all' === category ? 'active' : ''}
                     to={getFilterUrl({ category: 'all' })}
                   >
-                    Any
+                    No Filter
                   </Link>
                 </li>
                 {categories.map((c) => (
@@ -128,6 +128,14 @@ export default function SearchScreen(props) {
           <div>
             <h3>Avg. Customer Review</h3>
             <ul>
+            <li className="pDetails">
+                  <Link
+                    className={(0 === rating || -1 == rating) ? 'active' : ''}
+                    to={getFilterUrl({ rating: -1 })}
+                  >
+                    No Filter
+                  </Link>
+                </li>
               {ratings.map((r) => (
                 <li id="black" key={r.name}>
                   <Link
