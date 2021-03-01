@@ -19,9 +19,9 @@ export default function PlaceOrderScreen(props) {
   cart.itemsPrice = toPrice(
     cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
   );
-  cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
+  cart.shippingPrice = 60;//cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
   cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
-  cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+  cart.totalPrice = cart.itemsPrice + cart.shippingPrice;// + cart.taxPrice;
   const dispatch = useDispatch();
   const placeOrderHandler = () => {
     dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
@@ -76,7 +76,9 @@ export default function PlaceOrderScreen(props) {
                             <p className="pDetails">{item.name}</p>
                           </Link>
                         </div>
-
+                        <div className="pDetails">
+                          {item.size}
+                        </div>
                         <div className="pDetails">
                           {item.qty} x {item.price}/- = {item.qty * item.price}/-
                         </div>
@@ -106,12 +108,12 @@ export default function PlaceOrderScreen(props) {
                   <div>{cart.shippingPrice.toFixed(2)}/-</div>
                 </div>
               </li>
-              <li className="pDetails">
+              {/* <li className="pDetails">
                 <div className="row" id="white">
                   <div>Tax</div>
                   <div>{cart.taxPrice.toFixed(2)}/-</div>
                 </div>
-              </li>
+              </li> */}
               <li className="pDetails">
                 <div className="row" id="white">
                   <div>

@@ -19,7 +19,7 @@ export default function CartScreen(props) {
 
   const Pprice = props.location.search.split('=')[3];
   const [size, setSize] = useState(Psize);
-  const [price, setPrice] = useState(Pprice);
+  // const [price, setPrice] = useState(Pprice);
   const cart = useSelector((state) => state.cart);
   const { cartItems, error } = cart;
   let path=[];
